@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form(form) }}
+
+    {% if encoded is not empty %}
+
+        <p>{{ encoded }}</p>
+
+    {% endif %}
+
+{% endblock %}
