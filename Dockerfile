@@ -27,4 +27,4 @@ WORKDIR /app
 
 COPY --from=build /app/build /app
 
-CMD php -S 0.0.0.0:80 -t .
+CMD php -S 0.0.0.0:80 -t public/

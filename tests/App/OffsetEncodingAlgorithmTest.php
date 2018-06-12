@@ -17,7 +17,7 @@ class OffsetEncodingAlgorithmTest extends TestCase
      */
     public function testValidEncoding($offset, $text, $encoded)
     {
-        $algorithm = new \App\OffsetEncodingAlgorithm($offset);
+        $algorithm = new \App\Algorithm\OffsetEncodingAlgorithm($offset);
 
         $this->assertEquals($encoded, $algorithm->encode($text));
     }

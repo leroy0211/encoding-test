@@ -17,7 +17,7 @@ class SubstitutionEncodingAlgorithmTest extends TestCase
      */
     public function testValidEncoding($substitutions, $text, $encoded)
     {
-        $algorithm = new \App\SubstitutionEncodingAlgorithm($substitutions);
+        $algorithm = new \App\Algorithm\SubstitutionEncodingAlgorithm($substitutions);
 
         $this->assertEquals($encoded, $algorithm->encode($text));
     }
