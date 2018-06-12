@@ -37,10 +37,42 @@ class OffsetEncodingAlgorithm implements EncodingAlgorithm
      */
     public function encode($text)
     {
-        /**
-         * @todo: Implement it
-         */
+        if (0 === $this->offset) {
+            return $text;
+        }
 
-        return '';
+        if (0 === $this->offset % strlen(self::CHARACTERS)) {
+            return $text;
+        }
+
+        $result = '';
+
+        foreach (str_split($text) as $letter) {
+            $result .= $this->convertLetter($letter);
+        }
+
+        return $result;
     }
+
+    /**
+     * @param string $letter
+     * @return string
+     */
+    private function convertLetter($letter)
+    {
+        if (empty($letter)) {
+            return $letter;
+        }
+
+        $position = strpos(self::CHARACTERS, $letter);
+
+        if (false === $position) {
+            return $letter;
+        }
+
+        $offset = ($position + $this->offset) % strlen(self::CHARACTERS);
+
+        return self::CHARACTERS[$offset];
+    }
+
 }
