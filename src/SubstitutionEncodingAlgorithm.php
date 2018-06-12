@@ -18,7 +18,7 @@ class SubstitutionEncodingAlgorithm implements EncodingAlgorithm
      */
     public function __construct(array $substitutions)
     {
-        $this->substitutions = array();
+        $this->substitutions = $substitutions;
     }
 
     /**
@@ -33,10 +33,23 @@ class SubstitutionEncodingAlgorithm implements EncodingAlgorithm
      */
     public function encode($text)
     {
-        /**
-         * @todo: Implement it
-         */
+        $replaces = [];
 
-        return '';
+        foreach ($this->substitutions as $pattern) {
+            $split = str_split($pattern);
+            $replaces[mb_strtolower($split[0])] = mb_strtolower($split[1]);
+            $replaces[mb_strtolower($split[1])] = mb_strtolower($split[0]);
+            $replaces[mb_strtoupper($split[0])] = mb_strtoupper($split[1]);
+            $replaces[mb_strtoupper($split[1])] = mb_strtoupper($split[0]);
+        }
+
+        $result = '';
+
+        foreach (str_split($text) as $letter) {
+            $result .= $replaces[$letter] ?? $letter;
+        }
+
+        return $result;
     }
+
 }
